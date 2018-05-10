@@ -1,8 +1,11 @@
 package com.mamc.cursomc.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
+
 import com.mamc.cursomc.domain.Categoria;
 import com.mamc.cursomc.repositories.CategoriaRepository;
 import com.mamc.cursomc.services.exceptions.DataIntegrityException;
@@ -41,6 +44,10 @@ public class CategoriaService {
 		catch (DataIntegrityViolationException e) {
 			throw new DataIntegrityException("Não é possível excluir uma categoria que possui Produtos!");
 		}
+	}
+	
+	public List<Categoria> findAll(){
+		return repo.findAll();
 	}
 	
 }
