@@ -2,13 +2,14 @@ package com.mamc.cursomc.services;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
-
 import com.mamc.cursomc.domain.Cidade;
 import com.mamc.cursomc.domain.Cliente;
 import com.mamc.cursomc.domain.Endereco;
@@ -37,6 +38,7 @@ public class ClienteService {
 		return obj;
 	}
 	
+	@Transactional
 	public Cliente insert(Cliente obj) {
 		obj.setId(null);
 		obj = repo.save(obj);
@@ -57,7 +59,7 @@ public class ClienteService {
 		repo.delete(id);
 		}
 		catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityException("Não é possíveis excluir pois há entidades relacionadas!");
+			throw new DataIntegrityException("Não é possível excluir pois há pedidos relacionadas!");
 		}
 	}
 	
